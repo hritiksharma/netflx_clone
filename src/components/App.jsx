@@ -6,7 +6,6 @@ import useStyles from "./styles";
 
 const App = () => {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <CssBaseline />
