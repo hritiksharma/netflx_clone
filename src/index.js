@@ -1,5 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/App";
+import { BrowserRouter as Router } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import App from "./components/App";
+const theme = createTheme({});
+
+ReactDOM.render(
+  <ThemeProvider theme={theme}>
+    <Router>
+      <App />
+    </Router>
+  </ThemeProvider>,
+  document.getElementById("root")
+);
