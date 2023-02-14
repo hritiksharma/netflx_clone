@@ -1,4 +1,3 @@
-import { ThemeContext } from "@emotion/react";
 import { makeStyles } from "@mui/styles";
 
 export default makeStyles((theme) => ({
@@ -12,10 +11,9 @@ export default makeStyles((theme) => ({
   },
   links: {
     color: theme.palette.text.primary,
-    textDecoration: "none", 
+    textDecoration: "none",
   },
   genreImage: {
-    filter: theme.palette.mode === 'dark' ? 'dark' : 'invert(1)',
-    
-  }
+    filter: theme.palette.mode === "dark" ? "dark" : "invert(1)",
+  },
 }));
