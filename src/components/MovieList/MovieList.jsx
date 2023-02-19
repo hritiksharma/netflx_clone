@@ -4,6 +4,7 @@ import { Movie } from "../index";
 import useStyles from "./styles";
 
 const MovieList = ({ movies }) => {
+  // const
   const classes = useStyles();
   console.log("movies------- in MovieList>>>>", movies);
   return (
