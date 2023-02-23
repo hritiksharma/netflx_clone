@@ -17,10 +17,10 @@ const Movies = () => {
   const { genreIdOrCategoryName } = useSelector(
     (state) => state.currentGenereOrCategory
   );
-  const { data, error, isLoading } = useGetMoviesQuery(
+  const { data, error, isLoading } = useGetMoviesQuery({
     genreIdOrCategoryName,
-    page
-  );
+    page,
+  });
   console.log("data-----------in Movies", data);
   if (isLoading) {
     return (
@@ -44,6 +44,7 @@ const Movies = () => {
   }
 
   if (error) {
+    console.log("Error", error);
     return "An Error has occured";
   }
 
