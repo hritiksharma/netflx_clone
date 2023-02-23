@@ -33,11 +33,8 @@ const Sidebar = ({ setMobileOpen }) => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const { genreIdOrCategoryName } = useSelector(
-    (state) => state.currentGenereOrCategory
-  );
+
   const { data, isFetching } = useGetGeneresQuery();
-  console.log("selectGenreOrCategoryName", genreIdOrCategoryName);
   return (
     <>
       <Link to="/" className={classes.imageLink}>
@@ -53,7 +50,7 @@ const Sidebar = ({ setMobileOpen }) => {
         {categories.map(({ label, value }) => (
           <Link key={value} className={classes.links} to="/">
             <ListItem
-              onClick={() => dispatch(selectGenreOrCategory(label))}
+              onClick={() => dispatch(selectGenreOrCategory(value))}
               button
             >
               <ListItemIcon>
@@ -80,7 +77,7 @@ const Sidebar = ({ setMobileOpen }) => {
           data.genres.map(({ name, id }) => (
             <Link key={name} className={classes.links} to="/">
               <ListItem
-                onClick={() => dispatch(selectGenreOrCategory(name))}
+                onClick={() => dispatch(selectGenreOrCategory(id))}
                 button
               >
                 <ListItemIcon>

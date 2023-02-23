@@ -6,14 +6,14 @@ import {
   Typography,
 } from "@mui/material";
 import { useSelector } from "react-redux";
-import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
 
 import { useGetMoviesQuery } from "../../services/TMDB.js";
+import { selectGenreOrCategory } from "../../features/currentGenreOrCategory";
+
 import { MovieList } from "../index";
 
 const Movies = () => {
   const [page, setPage] = useState(1);
-
   const { genreIdOrCategoryName } = useSelector(
     (state) => state.currentGenereOrCategory
   );
@@ -22,6 +22,7 @@ const Movies = () => {
     page,
   });
   console.log("data-----------in Movies", data);
+  // console.log("current genere or category name", genreIdOrCategoryName);
   if (isLoading) {
     return (
       <Box display="flex" justifyContent="center">
@@ -44,7 +45,6 @@ const Movies = () => {
   }
 
   if (error) {
-    console.log("Error", error);
     return "An Error has occured";
   }
 
