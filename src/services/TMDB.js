@@ -16,7 +16,13 @@ export const tmdbApi = createApi({
 
     //* Get All Movies....
     getMovies: builder.query({
-      query: ({ genreIdOrCategoryName, page }) => {
+      query: ({ genreIdOrCategoryName, searchQuery, page }) => {
+        // get movies by search query...
+        if (searchQuery) {
+          console.log("we are inside the search", searchQuery);
+          return `search/movie?query=${searchQuery}&page=${page}&api_key=${tmdbApiKey}`;
+        }
+
         // Get Movie by Category Popular, TopRated, Upcoming
         if (
           genreIdOrCategoryName &&
