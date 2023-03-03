@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   IconButton,
@@ -15,16 +15,43 @@ import {
   Brightness4,
   Brightness7,
 } from "@mui/icons-material";
+import { fetchToken, createSessionId, movieApi } from "../utils";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
 import { Sidebar, Search } from "..";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser, userSelector } from "../../features/auth";
 
 const NavBar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { isAuthenticated, user } = useSelector(userSelector);
   const classes = useStyles();
   const isMobile = useMediaQuery("(max-width:600px)");
   const theme = useTheme();
-  const isAuthenticated = true;
+  const dispatch = useDispatch();
+  const token = localStorage.getItem("request_token");
+  const sessionIdFromLocalStorage = localStorage.getItem("session_id");
+  useEffect(() => {
+    const logInUser = async () => {
+      if (token) {
+        if (sessionIdFromLocalStorage) {
+          const { data: userData } = movieApi.get(
+            `/account?session_id=${sessionIdFromLocalStorage}`
+          );
+          dispatch(setUser(userData));
+        } else {
+          const sessionId = createSessionId();
+          const { data: userData } = movieApi.get(
+            `/account?session_id=${sessionId}`
+          );
+          dispatch(setUser(userData));
+        }
+      }
+    };
+    logInUser();
+  }, [token]);
+
+  console.log("user", user);
   return (
     <>
       <AppBar position="fixed">
@@ -48,7 +75,7 @@ const NavBar = () => {
           {!isMobile && <Search />}
           <div>
             {!isAuthenticated ? (
-              <Button color="inherit" onClick={() => {}}>
+              <Button color="inherit" onClick={fetchToken}>
                 Login &nbsp; <AccountCircle />
               </Button>
             ) : (
