@@ -6,6 +6,7 @@ import { TextField, InputAdornment } from "@mui/material";
 import { Search as SearchIcon } from "@mui/icons-material";
 import { useLocation } from "react-router-dom";
 import { searchMovie } from "../../features/currentGenreOrCategory";
+
 const Search = () => {
   const classes = useStyles();
   const [query, setQuery] = useState("");
